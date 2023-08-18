@@ -11,14 +11,16 @@ const Goods = ({
   goods,
   totalCost,
   setTotalCost,
+  totalAmount,
+  setTotalAmount,
 }) => {
   const { removeItem } = useGlobalContext();
   price = parseFloat(price);
   const [count, setCount] = useState(amount);
 
-  let clickIncrease = () => {
-    setCount(count + 1);
-  };
+  //   let clickIncrease = () => {
+  //     setCount(count + 1);
+  //   };
   amount = count;
   let handleIncrease = (id) => {
     let increase = goods.find((item) => {
@@ -41,9 +43,15 @@ const Goods = ({
     acc += curr.price * curr.amount;
     return Math.round((acc + Number.EPSILON) * 100) / 100; // Math.round((num + Number.EPSILON) * 100) / 100 will round-off my value to 2dp
   }, 0);
+  totalAmount = goods.reduce((acc, curr) => {
+    acc += curr.amount;
+    return acc; // Math.round((num + Number.EPSILON) * 100) / 100 will round-off my value to 2dp
+  }, 0);
+  //   console.log(totalAmount);
 
   useEffect(() => {
     setTotalCost(totalCost);
+    setTotalAmount(totalAmount);
   }, [totalCost]); //To resolve the warning(Cannot update a component while rendering a different component), I wrap the logic that updates the state(totalCost) in the useEffect hook.
 
   return (

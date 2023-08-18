@@ -7,6 +7,7 @@ import { useGlobalContext } from "./context";
 function App() {
   const { isLoading, isError, goods, clearCart } = useGlobalContext();
   let [totalCost, setTotalCost] = useState(0);
+  let [totalAmount, setTottotalAmount] = useState(0);
 
   if (isLoading) {
     return (
@@ -52,7 +53,7 @@ function App() {
             <div className="cart">
               <FaCartPlus />
             </div>
-            <div className="cart-unit">{goods.length}</div>
+            <div className="cart-unit">{totalAmount}</div>
           </div>
         </div>
       </div>
@@ -67,6 +68,8 @@ function App() {
               goods={goods}
               totalCost={totalCost}
               setTotalCost={setTotalCost}
+              totalAmount={totalAmount}
+              setTotalAmount={setTottotalAmount}
             />
           );
         })}
